@@ -5,13 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HereThen — Location intelligence</title>
 <meta name="description" content="HereThen — B2B location intelligence. By Train of Thoughts.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <style>
   :root {
     --paper:  #fcfcfb;
     --ink:    #14161a;
     --muted:  #9296a0;
     --line:   #ededeb;
-    --accent: #1b6b62;
+    --accent: #ed7a1a;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { height: 100%; }
@@ -29,33 +30,25 @@
     align-items: center; justify-content: center;
     padding: 8vh 7vw;
   }
-
-  /* Default state is the FINAL state — page is fully visible
-     without any animation running. Animations are layered as
-     enhancement only via @media (prefers-reduced-motion: no-preference)
-     at the bottom. If JS/animations are disabled / blocked /
-     fail to start, every element is already in its final
-     opacity:1 position. */
-  .mark {
-    position: relative;
+  .ringmark {
+    width: clamp(56px, 11vw, 92px);
+    height: clamp(56px, 11vw, 92px);
+    margin-bottom: clamp(1.1rem, 2.4vw, 1.8rem);
+    opacity: 1;
+    animation: drop 0.8s cubic-bezier(0.34, 1.35, 0.5, 1) both;
+    animation-delay: 0.3s;
+  }
+  .wordmark {
     font-weight: 600;
     font-size: clamp(3rem, 12vw, 6.8rem);
     line-height: 1;
     letter-spacing: -0.04em;
     opacity: 1;
+    animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
-  .mark .t { color: var(--accent); }
-
-  .pin {
-    position: absolute;
-    top: -0.34em; left: 50%;
-    width: 0.16em; height: 0.16em;
-    margin-left: -0.08em;
-    border-radius: 50%;
-    background: var(--accent);
-    opacity: 1;
-  }
-
+  .wordmark .t { color: var(--accent); }
+  @keyframes rise { from { opacity: 0; transform: translateY(0.12em); } to { opacity: 1; transform: none; } }
+  @keyframes drop { 0% { opacity: 0; transform: translateY(-0.7em) scale(0.9); } 60% { opacity: 1; } 100% { opacity: 1; transform: none; } }
   .tagline {
     margin-top: 1.8rem;
     font-size: clamp(1rem, 2.3vw, 1.22rem);
@@ -64,16 +57,18 @@
     max-width: 24ch;
     font-weight: 400;
     opacity: 1;
+    animation: fade 0.9s ease 0.7s both;
   }
   .contact {
     margin-top: 2.6rem;
     font-size: clamp(1rem, 2.5vw, 1.2rem);
     opacity: 1;
+    animation: fade 0.9s ease 0.95s both;
   }
   .contact a {
     color: var(--ink);
     text-decoration: none;
-    border-bottom: 1.5px solid rgba(27,107,98,0.3);
+    border-bottom: 1.5px solid rgba(237,122,26,0.35);
     padding-bottom: 2px;
     transition: color 0.18s ease, border-color 0.18s ease;
   }
@@ -81,7 +76,7 @@
     color: var(--accent); border-color: var(--accent); outline: none;
   }
   .contact a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; border-radius: 2px; }
-
+  @keyframes fade { from { opacity: 0; transform: translateY(0.4rem); } to { opacity: 1; transform: none; } }
   footer {
     padding: 1.8rem 7vw 2.2rem;
     color: var(--muted);
@@ -91,29 +86,21 @@
     gap: 0.3rem 1.2rem;
   }
   footer .sep { color: var(--line); }
-
-  @keyframes rise { from { opacity: 0; transform: translateY(0.12em); } to { opacity: 1; transform: none; } }
-  @keyframes drop { 0% { opacity: 0; transform: translateY(-0.9em); } 60% { opacity: 1; } 100% { opacity: 1; transform: translateY(0); } }
-  @keyframes fade { from { opacity: 0; transform: translateY(0.4rem); } to { opacity: 1; transform: none; } }
-
-  /* Entrance animations are an ENHANCEMENT layered on top of the
-     already-visible default state. They only apply when the user
-     has not requested reduced motion — meaning a reduced-motion
-     user gets the same fully-visible page as a no-CSS-animation
-     render would. */
-  @media (prefers-reduced-motion: no-preference) {
-    .mark    { animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
-    .pin     { animation: drop 0.7s cubic-bezier(0.34, 1.4, 0.5, 1) both; animation-delay: 0.55s; }
-    .tagline { animation: fade 0.9s ease 0.7s  both; }
-    .contact { animation: fade 0.9s ease 0.95s both; }
+  @media (prefers-reduced-motion: reduce) {
+    .ringmark, .wordmark, .tagline, .contact { animation: none; }
   }
 </style>
 </head>
 <body>
   <main>
-    <div class="mark" aria-label="HereThen">
-      <span class="pin" aria-hidden="true"></span>Here<span class="t">Then</span>
-    </div>
+    <svg class="ringmark" viewBox="0 0 80 80" role="img" aria-label="HereThen">
+      <title>HereThen</title>
+      <circle cx="40" cy="40" r="38" fill="none" stroke="#ed7a1a" stroke-width="1.5" opacity="0.18"/>
+      <circle cx="40" cy="40" r="26" fill="none" stroke="#ed7a1a" stroke-width="1.5" opacity="0.4"/>
+      <circle cx="40" cy="40" r="14" fill="none" stroke="#ed7a1a" stroke-width="1.5" opacity="0.7"/>
+      <circle cx="40" cy="40" r="6.5" fill="#ed7a1a"/>
+    </svg>
+    <div class="wordmark" aria-label="HereThen">Here<span class="t">Then</span></div>
     <p class="tagline">Location intelligence for where your network goes next.</p>
     <p class="contact"><a href="mailto:tim@trainofthoughts.be">tim@trainofthoughts.be</a></p>
   </main>
