@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HereThen — Location intelligence</title>
+<meta name="description" content="HereThen — B2B location intelligence. By Train of Thoughts.">
+<style>
+  :root {
+    --paper:  #fcfcfb;
+    --ink:    #14161a;
+    --muted:  #9296a0;
+    --line:   #ededeb;
+    --accent: #1b6b62;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    display: flex; flex-direction: column; min-height: 100vh;
+    text-align: center;
+    -webkit-font-smoothing: antialiased;
+  }
+  main {
+    flex: 1;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 8vh 7vw;
+  }
+
+  /* Default state is the FINAL state — page is fully visible
+     without any animation running. Animations are layered as
+     enhancement only via @media (prefers-reduced-motion: no-preference)
+     at the bottom. If JS/animations are disabled / blocked /
+     fail to start, every element is already in its final
+     opacity:1 position. */
+  .mark {
+    position: relative;
+    font-weight: 600;
+    font-size: clamp(3rem, 12vw, 6.8rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    opacity: 1;
+  }
+  .mark .t { color: var(--accent); }
+
+  .pin {
+    position: absolute;
+    top: -0.34em; left: 50%;
+    width: 0.16em; height: 0.16em;
+    margin-left: -0.08em;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 1;
+  }
+
+  .tagline {
+    margin-top: 1.8rem;
+    font-size: clamp(1rem, 2.3vw, 1.22rem);
+    line-height: 1.45;
+    color: var(--ink);
+    max-width: 24ch;
+    font-weight: 400;
+    opacity: 1;
+  }
+  .contact {
+    margin-top: 2.6rem;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    opacity: 1;
+  }
+  .contact a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1.5px solid rgba(27,107,98,0.3);
+    padding-bottom: 2px;
+    transition: color 0.18s ease, border-color 0.18s ease;
+  }
+  .contact a:hover, .contact a:focus-visible {
+    color: var(--accent); border-color: var(--accent); outline: none;
+  }
+  .contact a:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; border-radius: 2px; }
+
+  footer {
+    padding: 1.8rem 7vw 2.2rem;
+    color: var(--muted);
+    font-size: 0.8rem;
+    letter-spacing: 0.012em;
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: 0.3rem 1.2rem;
+  }
+  footer .sep { color: var(--line); }
+
+  @keyframes rise { from { opacity: 0; transform: translateY(0.12em); } to { opacity: 1; transform: none; } }
+  @keyframes drop { 0% { opacity: 0; transform: translateY(-0.9em); } 60% { opacity: 1; } 100% { opacity: 1; transform: translateY(0); } }
+  @keyframes fade { from { opacity: 0; transform: translateY(0.4rem); } to { opacity: 1; transform: none; } }
+
+  /* Entrance animations are an ENHANCEMENT layered on top of the
+     already-visible default state. They only apply when the user
+     has not requested reduced motion — meaning a reduced-motion
+     user gets the same fully-visible page as a no-CSS-animation
+     render would. */
+  @media (prefers-reduced-motion: no-preference) {
+    .mark    { animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+    .pin     { animation: drop 0.7s cubic-bezier(0.34, 1.4, 0.5, 1) both; animation-delay: 0.55s; }
+    .tagline { animation: fade 0.9s ease 0.7s  both; }
+    .contact { animation: fade 0.9s ease 0.95s both; }
+  }
+</style>
+</head>
+<body>
+  <main>
+    <div class="mark" aria-label="HereThen">
+      <span class="pin" aria-hidden="true"></span>Here<span class="t">Then</span>
+    </div>
+    <p class="tagline">Location intelligence for where your network goes next.</p>
+    <p class="contact"><a href="mailto:tim@trainofthoughts.be">tim@trainofthoughts.be</a></p>
+  </main>
+  <footer>
+    <span>HereThen — a product by Train of Thoughts BV</span>
+    <span class="sep">·</span>
+    <span>Sint-Niklaas, Belgium</span>
+  </footer>
+</body>
+</html>
